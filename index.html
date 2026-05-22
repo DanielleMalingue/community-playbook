@@ -3,28 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Modern Brands & Community Playbook — For Tina</title>
+<title>Modern Brands &amp; Community Playbook — For Tina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #fdfcfa;
     --ink: #1a1a1a;
     --muted: #777;
     --line: #e8e6e1;
-    --c01: #D97842;
-    --c02: #2A8D8D;
-    --c03: #A8336E;
-    --c04: #C73E7C;
-    --c05: #8B8930;
-    --c06: #1E3A6B;
-    --c07: #6B1F4D;
-    --c08: #2D8A3E;
-    --c09: #4FB3BF;
-    --c10: #7CB342;
-    --c11: #B91C2C;
+    --c01: #D97842; --c01-soft: #FDF4ED; --c01-mid: #F4D5BD;
+    --c02: #2A8D8D; --c02-soft: #ECF6F6; --c02-mid: #BFE0DF;
+    --c03: #A8336E; --c03-soft: #FAEEF3; --c03-mid: #E8C3D2;
+    --c04: #C73E7C; --c04-soft: #FDEEF5; --c04-mid: #F0C5D9;
+    --c05: #8B8930; --c05-soft: #F6F5E8; --c05-mid: #DAD8B0;
+    --c06: #1E3A6B; --c06-soft: #EDF1F8; --c06-mid: #BDC9DD;
+    --c07: #6B1F4D; --c07-soft: #F5ECF1; --c07-mid: #D8BDCB;
+    --c08: #2D8A3E; --c08-soft: #EEF7EF; --c08-mid: #BFDDC4;
+    --c09: #4FB3BF; --c09-soft: #ECF8F9; --c09-mid: #C6E8EB;
+    --c10: #7CB342; --c10-soft: #F2F8EA; --c10-mid: #D2E5BA;
+    --c11: #B91C2C; --c11-soft: #FCEDEF; --c11-mid: #F0C4C9;
     --accent: var(--ink);
+    --accent-soft: var(--bg);
+    --accent-mid: var(--line);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--ink); }
@@ -40,15 +42,12 @@
   /* ============ NAV ============ */
   nav.top {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(253, 252, 250, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    top: 0; left: 0; right: 0;
+    background: rgba(253, 252, 250, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
     z-index: 100;
-    transition: border-color 0.6s ease;
   }
   .nav-inner {
     max-width: 1280px;
@@ -58,6 +57,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    position: relative;
   }
   .nav-brand {
     font-family: 'Fraunces', serif;
@@ -82,6 +82,40 @@
     justify-content: flex-end;
     align-items: center;
   }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.75rem;
+    font-family: 'Newsreader', serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+  }
+  .nav-item:hover { color: var(--ink); }
+  .nav-item.active { color: var(--ink); font-weight: 500; }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .nav-item:hover .nav-dot, .nav-item.active .nav-dot {
+    opacity: 1; transform: scale(1.35);
+  }
+  .nav-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-right: 0.15rem;
+    opacity: 0.7;
+  }
   @media (max-width: 900px) {
     .nav-menu {
       display: none;
@@ -89,11 +123,9 @@
     .nav-menu.open {
       display: flex;
       position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
+      top: 100%; left: 0; right: 0;
       background: rgba(253, 252, 250, 0.98);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       flex-direction: column;
       align-items: stretch;
       padding: 0.5rem;
@@ -121,79 +153,61 @@
     color: var(--ink);
     cursor: pointer;
     border-radius: 100px;
-    letter-spacing: 0.1em;
   }
   @media (max-width: 900px) {
     .nav-toggle { display: inline-flex; align-items: center; gap: 0.4rem; }
   }
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.5rem 0.75rem;
-    font-family: 'Newsreader', serif;
-    font-size: 0.78rem;
-    color: var(--muted);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    border-radius: 100px;
-    white-space: nowrap;
-    transition: all 0.25s ease;
-  }
-  .nav-item:hover {
-    color: var(--ink);
-  }
-  .nav-item.active {
-    color: var(--ink);
-    font-weight: 500;
-  }
-  .nav-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    opacity: 0.55;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-  .nav-item:hover .nav-dot,
-  .nav-item.active .nav-dot {
-    opacity: 1;
-    transform: scale(1.3);
-  }
-  .nav-num {
-    font-family: 'Fraunces', serif;
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-right: 0.15rem;
-    opacity: 0.7;
-  }
 
-  /* ============ PAGE SHELL ============ */
-  main {
-    padding-top: 4rem;
-    min-height: 100vh;
-  }
+  /* ============ PAGES ============ */
+  main { padding-top: 4rem; min-height: 100vh; }
   .page {
     display: none;
     min-height: calc(100vh - 4rem);
-    animation: pageIn 0.6s ease;
+    animation: pageIn 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .page.active { display: block; }
   @keyframes pageIn {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ============ COVER PAGE ============ */
+  /* ============ COVER ============ */
   #cover {
+    display: none;
     min-height: calc(100vh - 4rem);
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 4rem 2rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cover.active { display: flex; }
+  .cover-bg-orbs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cover-bg-orbs .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.18;
+    animation: orbDrift 18s ease-in-out infinite;
+  }
+  @keyframes orbDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.1); }
+    66% { transform: translate(-20px, 25px) scale(0.95); }
+  }
+  .cover-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .cover-occasion {
     font-family: 'Newsreader', serif;
@@ -206,7 +220,7 @@
   .cover-title {
     font-family: 'Fraunces', serif;
     font-weight: 400;
-    font-size: clamp(2.75rem, 8vw, 5.5rem);
+    font-size: clamp(2.5rem, 7.5vw, 5rem);
     line-height: 1.02;
     letter-spacing: -0.025em;
     color: var(--ink);
@@ -223,22 +237,25 @@
   }
   .cover-spectrum {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.55rem;
     margin-bottom: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 400px;
   }
   .cover-spectrum .dot {
-    width: 14px;
-    height: 14px;
+    width: 16px; height: 16px;
     border-radius: 50%;
     border: none;
     padding: 0;
     cursor: pointer;
     opacity: 0.9;
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
     animation: dotIn 0.6s ease backwards;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   .cover-spectrum .dot:hover {
-    transform: scale(1.4);
+    transform: scale(1.5);
     opacity: 1;
   }
   .cover-spectrum .dot:nth-child(1) { animation-delay: 0.2s; }
@@ -253,35 +270,35 @@
   .cover-spectrum .dot:nth-child(10) { animation-delay: 0.92s; }
   .cover-spectrum .dot:nth-child(11) { animation-delay: 1.0s; }
   @keyframes dotIn {
-    from { opacity: 0; transform: translateY(8px) scale(0.5); }
+    from { opacity: 0; transform: translateY(8px) scale(0.4); }
     to { opacity: 0.9; transform: translateY(0) scale(1); }
   }
   .cover-inscription {
-    max-width: 560px;
+    max-width: 580px;
     font-family: 'Newsreader', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 1.02rem;
+    font-size: 1.05rem;
     line-height: 1.85;
-    color: #555;
+    color: #444;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    padding: 2.25rem 0;
+    padding: 2.25rem 1rem;
   }
   .cover-inscription .sig {
     display: block;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     color: var(--muted);
     font-size: 0.85rem;
     font-style: normal;
     letter-spacing: 0.05em;
   }
   .cover-begin {
-    margin-top: 4rem;
-    background: transparent;
+    margin-top: 3.5rem;
+    background: var(--ink);
     border: 1.5px solid var(--ink);
-    color: var(--ink);
-    padding: 0.95rem 2.5rem;
+    color: var(--bg);
+    padding: 1rem 2.75rem;
     font-family: 'Newsreader', serif;
     font-size: 0.78rem;
     letter-spacing: 0.28em;
@@ -290,79 +307,127 @@
     border-radius: 100px;
     transition: all 0.3s ease;
   }
-  .cover-begin:hover {
-    background: var(--ink);
-    color: var(--bg);
-  }
+  .cover-begin:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 
   /* ============ CHAPTER PAGE ============ */
   .chapter-page {
-    padding: 5rem 2rem 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Subtle background wash per chapter */
+  .chapter-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-soft);
+    opacity: 0.7;
+    z-index: 0;
+    pointer-events: none;
+  }
+  /* Chapter-specific giant background number */
+  .chapter-page::after {
+    content: attr(data-num);
+    position: absolute;
+    top: 50%;
+    right: -3vw;
+    transform: translateY(-50%);
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(20rem, 40vw, 38rem);
+    color: var(--accent);
+    opacity: 0.04;
+    z-index: 0;
+    pointer-events: none;
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.04em;
+  }
+  .chapter-inner {
+    position: relative;
+    z-index: 1;
     max-width: 1100px;
     margin: 0 auto;
+    padding: 4rem 2rem 7rem;
   }
-  .chapter-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding-bottom: 4rem;
-    border-bottom: 1px solid var(--line);
+
+  /* Chapter header band */
+  .chapter-banner {
+    background: var(--accent);
+    color: white;
+    padding: 3rem 2.5rem;
+    border-radius: 8px;
     margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
   }
-  .chapter-meta-row {
+  .chapter-banner::after {
+    content: attr(data-num);
+    position: absolute;
+    right: -1rem;
+    bottom: -3rem;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(8rem, 16vw, 14rem);
+    color: rgba(255,255,255,0.18);
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.04em;
+  }
+  .chapter-banner-meta {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .chapter-banner-num {
     font-family: 'Fraunces', serif;
-  }
-  .chapter-color-bar {
-    width: 48px;
-    height: 4px;
-    background: var(--accent);
-  }
-  .chapter-num-label {
     font-size: 0.85rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: 500;
   }
-  .chapter-kicker-label {
+  .chapter-banner-kicker {
+    font-family: 'Newsreader', serif;
     font-style: italic;
-    color: var(--muted);
-    font-size: 0.9rem;
-    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.92rem;
   }
-  .chapter-title {
+  .chapter-banner-title {
     font-family: 'Fraunces', serif;
     font-weight: 400;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 1.02;
     letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
+    color: white;
+    margin-bottom: 1rem;
     font-variation-settings: "opsz" 144;
+    position: relative;
+    z-index: 2;
   }
-  .chapter-tagline {
+  .chapter-banner-tagline {
     font-family: 'Newsreader', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
     line-height: 1.5;
-    color: #444;
+    color: rgba(255,255,255,0.95);
     max-width: 640px;
+    position: relative;
+    z-index: 2;
   }
 
-  /* Chapter body — two-column on desktop, stack on mobile */
+  /* Chapter body */
   .chapter-body {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
-    gap: 5rem;
+    gap: 4rem;
     align-items: start;
   }
   @media (max-width: 880px) {
-    .chapter-body { grid-template-columns: 1fr; gap: 3rem; }
+    .chapter-body { grid-template-columns: 1fr; gap: 2.5rem; }
   }
   .chapter-main {
     display: flex;
@@ -372,47 +437,47 @@
   .chapter-side {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    position: sticky;
-    top: 6rem;
-  }
-  @media (max-width: 880px) {
-    .chapter-side { position: static; }
+    gap: 1.5rem;
   }
 
-  /* Pull quote */
-  .pullquote {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(1.4rem, 2.8vw, 2rem);
-    line-height: 1.4;
-    color: var(--ink);
-    padding-left: 2rem;
-    border-left: 3px solid var(--accent);
-    font-style: italic;
-  }
-  .pullquote-big {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    line-height: 1.2;
-    color: var(--ink);
-    letter-spacing: -0.015em;
-    font-style: italic;
-  }
-  .pullquote-big .accent { color: var(--accent); }
-
+  /* Body text */
   .body-text {
     font-family: 'Newsreader', serif;
     font-weight: 300;
     font-size: 1.1rem;
     line-height: 1.75;
     color: #2a2a2a;
-    max-width: 620px;
   }
-  .body-text em { color: var(--accent); font-style: italic; }
+  .body-text em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .body-text strong {
+    color: var(--accent);
+    font-weight: 500;
+    font-style: normal;
+  }
 
-  /* Open question — replaces "She asks" — no label */
+  /* Pull quote — big and colored */
+  .pullquote-big {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    font-style: italic;
+    padding: 2rem 0 2rem 2.5rem;
+    border-left: 5px solid var(--accent);
+    position: relative;
+  }
+  .pullquote-big .accent {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* Open question */
   .open-q {
     font-family: 'Fraunces', serif;
     font-style: italic;
@@ -421,16 +486,26 @@
     line-height: 1.55;
     color: var(--ink);
     padding: 2rem 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--accent-mid);
+    border-bottom: 1px solid var(--accent-mid);
+    position: relative;
+  }
+  .open-q::before {
+    content: '';
+    position: absolute;
+    left: 0; top: -1px;
+    width: 60px; height: 3px;
+    background: var(--accent);
   }
 
-  /* Side: factor card */
+  /* Side card */
   .side-card {
     padding: 1.75rem;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: #fff;
+    border: 1px solid var(--accent-mid);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(4px);
+    border-top: 4px solid var(--accent);
   }
   .side-card-label {
     font-family: 'Newsreader', serif;
@@ -442,7 +517,7 @@
   }
   .side-card-title {
     font-family: 'Fraunces', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--accent);
     margin-bottom: 0.75rem;
@@ -453,93 +528,105 @@
     line-height: 1.65;
     color: #444;
   }
+  .side-card-body em { color: var(--accent); font-style: italic; }
+
+  .side-stat {
+    padding: 1.75rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    font-family: 'Fraunces', serif;
+  }
+  .side-stat-big {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.02em;
+  }
+  .side-stat-label {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    font-weight: 300;
+    opacity: 0.95;
+  }
 
   /* Quiz */
   .quiz-card {
     padding: 2rem;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: #fff;
+    border: 1px solid var(--accent-mid);
+    border-radius: 8px;
+    background: white;
+    border-left: 4px solid var(--accent);
   }
   .quiz-q {
     font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: var(--ink);
     margin-bottom: 1.5rem;
   }
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.55rem; }
   .quiz-opt {
     background: transparent;
     border: 1px solid var(--line);
-    padding: 0.95rem 1.15rem;
+    padding: 1rem 1.25rem;
     font-family: 'Newsreader', serif;
-    font-size: 0.93rem;
+    font-size: 0.95rem;
     color: #2a2a2a;
     text-align: left;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 5px;
     transition: all 0.2s ease;
     line-height: 1.5;
   }
-  .quiz-opt:hover:not(.locked) {
-    border-color: var(--accent);
-  }
+  .quiz-opt:hover:not(.locked) { border-color: var(--accent); background: var(--accent-soft); }
   .quiz-opt.correct {
     border-color: var(--accent);
-    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
     font-weight: 400;
-    background: rgba(0,0,0,0.015);
   }
-  .quiz-opt.wrong {
-    opacity: 0.45;
-    text-decoration: line-through;
-  }
+  .quiz-opt.wrong { opacity: 0.4; text-decoration: line-through; }
   .quiz-opt.locked { cursor: default; }
   .quiz-feedback {
-    margin-top: 1.25rem;
-    padding-top: 1.25rem;
-    border-top: 1px dashed var(--line);
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--accent-soft);
+    border-radius: 4px;
     font-family: 'Newsreader', serif;
     font-style: italic;
     font-size: 0.98rem;
     line-height: 1.65;
-    color: #444;
+    color: #333;
     display: none;
   }
   .quiz-feedback.show { display: block; }
 
   /* Reveal card */
-  .reveal-card {
-    cursor: pointer;
-    user-select: none;
-  }
+  .reveal-card { cursor: pointer; user-select: none; }
   .reveal-prompt {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.85rem 1.5rem;
-    background: transparent;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
-    border-radius: 100px;
-    font-family: 'Newsreader', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    transition: all 0.3s ease;
-  }
-  .reveal-card:hover .reveal-prompt {
+    padding: 1rem 1.75rem;
     background: var(--accent);
     color: white;
+    border-radius: 100px;
+    font-family: 'Newsreader', serif;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   }
-  .reveal-card .arrow-r {
-    transition: transform 0.3s ease;
-    display: inline-block;
+  .reveal-card:hover .reveal-prompt {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   }
+  .reveal-card .arrow-r { display: inline-block; transition: transform 0.3s ease; }
   .reveal-card.open .arrow-r { transform: rotate(90deg); }
   .reveal-content {
     max-height: 0;
@@ -548,28 +635,364 @@
     opacity: 0;
   }
   .reveal-card.open .reveal-content {
-    max-height: 600px;
-    margin-top: 1.5rem;
+    max-height: 700px;
+    margin-top: 1.75rem;
     opacity: 1;
   }
   .reveal-body {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.65;
     color: #2a2a2a;
+    padding: 1.5rem 1.75rem;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+  }
+  .reveal-body em { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  /* ============ CHAPTER-SPECIFIC PLAY MOMENTS ============ */
+
+  /* CH01 — Purpose: three pillars in colored boxes */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    padding: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+    background: var(--accent);
+    color: white;
+    transition: transform 0.3s ease;
+  }
+  .pillar:hover { transform: translateY(-4px); }
+  .pillar:nth-child(2) {
+    background: var(--accent-mid);
+    color: var(--ink);
+  }
+  .pillar:nth-child(3) {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+  .pillar-label {
+    font-family: 'Newsreader', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    opacity: 0.85;
+  }
+  .pillar-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.4;
   }
 
-  /* Equation (virality) */
-  .equation {
+  /* CH02 — Storytelling: building blocks (each layer is a colored row) */
+  .story-layers { display: flex; flex-direction: column; gap: 0.5rem; }
+  .story-layer {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--accent);
+    background: white;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+  .story-layer:hover { transform: translateX(6px); }
+  .story-layer-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--accent);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .story-layer-body {
+    font-family: 'Newsreader', serif;
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.55;
+  }
+
+  /* CH03 — World Building: five senses */
+  .senses {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .senses { grid-template-columns: repeat(2, 1fr); } }
+  .sense {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fraunces', serif;
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+  }
+  .sense:nth-child(2) { background: var(--accent-mid); color: var(--ink); }
+  .sense:nth-child(3) { background: var(--accent); }
+  .sense:nth-child(4) { background: var(--accent-mid); color: var(--ink); }
+  .sense:nth-child(5) { background: var(--accent); }
+  .sense:hover { transform: scale(1.08) rotate(-3deg); }
+  .sense-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .sense-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  /* CH04 — Co-Create: overlapping color blocks */
+  .overlap-viz {
+    position: relative;
+    height: 200px;
+    margin: 1rem 0;
+  }
+  .overlap-circle {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    mix-blend-mode: multiply;
+    transition: transform 0.4s ease;
+  }
+  .overlap-circle:nth-child(1) { left: 25%; background: var(--accent); }
+  .overlap-circle:nth-child(2) { left: 50%; background: var(--accent-mid); }
+  .overlap-viz:hover .overlap-circle:nth-child(1) { transform: translateY(-50%) translateX(-12px); }
+  .overlap-viz:hover .overlap-circle:nth-child(2) { transform: translateY(-50%) translateX(12px); }
+  .overlap-label {
+    position: absolute;
+    bottom: -1.5rem;
+    width: 100%;
+    text-align: center;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  /* CH05 — Network Effects: animated dots/lines */
+  .network-viz {
+    position: relative;
+    height: 220px;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--accent-mid);
+    overflow: hidden;
+  }
+  .network-node {
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+    animation: nodePulse 3s ease-in-out infinite;
+  }
+  @keyframes nodePulse {
+    0%, 100% { box-shadow: 0 0 0 4px var(--accent-soft); }
+    50% { box-shadow: 0 0 0 8px var(--accent-soft); }
+  }
+  .network-line {
+    position: absolute;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+    transform-origin: left center;
+    animation: lineFade 4s ease-in-out infinite;
+  }
+  @keyframes lineFade {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.55; }
+  }
+
+  /* CH06 — Spotlights: spotlight effect */
+  .spotlight-box {
+    position: relative;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    background: var(--ink);
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+  .spotlight-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
+    transform: translate(-50%, -50%);
+    opacity: 0.55;
+    animation: spotlightSweep 6s ease-in-out infinite;
+  }
+  @keyframes spotlightSweep {
+    0%, 100% { transform: translate(-50%, -30%) scale(1); }
+    50% { transform: translate(-50%, -10%) scale(1.2); }
+  }
+  .spotlight-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    line-height: 1.4;
+  }
+  .spotlight-text .hero {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* CH07 — Phygital: split bridge */
+  .phygital-split {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: stretch;
+    margin: 1rem 0;
+  }
+  .phygital-side {
+    padding: 1.75rem;
+    border-radius: 8px;
+    background: white;
+    text-align: center;
+  }
+  .phygital-side.physical {
+    background: var(--accent);
+    color: white;
+  }
+  .phygital-side.digital {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 2px dashed var(--accent);
+  }
+  .phygital-bridge {
+    align-self: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+  .phygital-side-label {
+    font-family: 'Newsreader', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.85;
+  }
+  .phygital-side-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  /* CH08 — Gamification: scoreboard */
+  .gamify-board {
+    padding: 2rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .gamify-score {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    font-variation-settings: "opsz" 144;
+  }
+  .gamify-label {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+  .gamify-btn {
+    background: white;
+    color: var(--accent);
+    border: none;
+    padding: 0.75rem 1.75rem;
+    font-family: 'Newsreader', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .gamify-btn:hover { transform: translateY(-2px); }
+  .gamify-btn:active { transform: scale(0.97); }
+
+  /* CH09 — Receptional Design: joy moment on entry */
+  .joy-burst {
+    position: relative;
     text-align: center;
     padding: 3rem 1rem;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+  }
+  .joy-burst .ray {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 2px;
+    height: 80px;
+    background: var(--accent);
+    transform-origin: bottom center;
+    opacity: 0;
+    animation: rayBurst 1.2s ease-out forwards;
+  }
+  .joy-burst .ray:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); animation-delay: 0.1s; }
+  .joy-burst .ray:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); animation-delay: 0.15s; }
+  .joy-burst .ray:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); animation-delay: 0.2s; }
+  .joy-burst .ray:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); animation-delay: 0.25s; }
+  .joy-burst .ray:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); animation-delay: 0.3s; }
+  .joy-burst .ray:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); animation-delay: 0.35s; }
+  .joy-burst .ray:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); animation-delay: 0.4s; }
+  .joy-burst .ray:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); animation-delay: 0.45s; }
+  @keyframes rayBurst {
+    0% { opacity: 0; height: 0; }
+    40% { opacity: 1; height: 80px; }
+    100% { opacity: 0; height: 100px; }
+  }
+  .joy-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CH10 — Virality: equation builds */
+  .virality-eq {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: white;
+    border-radius: 8px;
+    border-top: 4px solid var(--accent);
   }
   .eq-line {
     font-family: 'Fraunces', serif;
-    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
     line-height: 1.6;
     color: var(--ink);
     font-weight: 400;
@@ -577,34 +1000,72 @@
   .eq-line .var {
     color: var(--accent);
     font-style: italic;
+    font-weight: 500;
+    display: inline-block;
+    animation: varIn 0.5s ease backwards;
+  }
+  .eq-line .var:nth-of-type(1) { animation-delay: 0.2s; }
+  .eq-line .var:nth-of-type(2) { animation-delay: 0.5s; }
+  .eq-line .var:nth-of-type(3) { animation-delay: 0.8s; }
+  @keyframes varIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .eq-line .x {
     margin: 0 0.5rem;
     color: var(--muted);
+    animation: xIn 0.4s ease backwards;
+  }
+  .eq-line .x:nth-of-type(1) { animation-delay: 0.35s; }
+  .eq-line .x:nth-of-type(2) { animation-delay: 0.65s; }
+  @keyframes xIn {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
   }
 
-  /* Chapter footer nav */
+  /* CH11 — Loyalty: breathing infinity */
+  .infinity-viz {
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+  .infinity-symbol {
+    display: inline-block;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(6rem, 18vw, 12rem);
+    color: var(--accent);
+    line-height: 1;
+    animation: infinityBreathe 4s ease-in-out infinite;
+    font-variation-settings: "opsz" 144;
+  }
+  @keyframes infinityBreathe {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  /* Chapter footer */
   .chapter-footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     margin-top: 5rem;
     padding-top: 3rem;
-    border-top: 1px solid var(--line);
-    gap: 2rem;
+    border-top: 2px solid var(--accent-mid);
+    gap: 1rem;
   }
   .ch-nav-btn {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
     background: transparent;
     border: none;
     cursor: pointer;
     text-align: left;
-    padding: 0;
-    transition: opacity 0.25s;
+    padding: 1.25rem;
+    border-radius: 8px;
+    transition: background 0.25s;
   }
-  .ch-nav-btn:hover { opacity: 0.6; }
+  .ch-nav-btn:hover:not([disabled]) { background: var(--accent-soft); }
   .ch-nav-btn.next { text-align: right; align-items: flex-end; }
   .ch-nav-btn[disabled] { opacity: 0.3; cursor: default; }
   .ch-nav-label {
@@ -612,7 +1073,7 @@
     font-size: 0.7rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--accent);
   }
   .ch-nav-title {
     font-family: 'Fraunces', serif;
@@ -621,77 +1082,60 @@
     font-weight: 400;
   }
 
-  /* ============ TRUTH PAGE ============ */
+  /* ============ TRUTH/CLOSING ============ */
   #truth {
+    display: none;
     min-height: calc(100vh - 4rem);
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 4rem 2rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  .truth-label {
-    font-family: 'Newsreader', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 3rem;
-  }
-  .truth-body {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
-    line-height: 1.45;
-    color: var(--ink);
-    max-width: 760px;
-    margin-bottom: 5rem;
-  }
-  .truth-body .line-2 {
-    display: block;
-    margin-top: 1.5rem;
-  }
-  .truth-closing {
-    max-width: 540px;
-  }
+  #truth.active { display: flex; }
+  .truth-closing { max-width: 540px; position: relative; z-index: 1; }
   .truth-closing h2 {
     font-family: 'Fraunces', serif;
     font-weight: 400;
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-size: clamp(2rem, 4.5vw, 3rem);
     color: var(--ink);
     margin-bottom: 2.5rem;
-  }
-  .brand-quote {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1.15rem;
-    line-height: 1.65;
-    color: #555;
-    margin-bottom: 2.5rem;
+    font-variation-settings: "opsz" 144;
   }
   .signed {
     font-family: 'Newsreader', serif;
     font-style: italic;
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.8;
   }
   .infinity {
     color: var(--c11);
-    font-size: 1.6rem;
+    font-size: 2rem;
     margin-top: 2rem;
     display: inline-block;
+    animation: infinityBreathe 4s ease-in-out infinite;
+  }
+  .truth-orbs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .truth-orbs .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.15;
+    animation: orbDrift 16s ease-in-out infinite;
   }
 
   @media (max-width: 700px) {
-    .chapter-page { padding: 3rem 1.5rem 5rem; }
+    .chapter-inner { padding: 2.5rem 1.25rem 5rem; }
+    .chapter-banner { padding: 2rem 1.5rem; }
     .nav-brand .for-tina { display: none; }
-    .nav-item { padding: 0.5rem 0.5rem; font-size: 0.72rem; }
-    .nav-num { display: none; }
-    .pullquote { padding-left: 1.25rem; }
+    .pullquote-big { padding-left: 1.5rem; }
   }
 </style>
 </head>
@@ -712,645 +1156,692 @@
 
 <!-- COVER -->
 <section class="page active" id="cover">
-  <div class="cover-occasion">A birthday gift</div>
-  <h1 class="cover-title">Modern Brands<br>&amp; Community<br>Playbook</h1>
-  <div class="cover-sub">Eleven chapters. In your colors. In your words.</div>
-  <div class="cover-spectrum">
-    <button class="dot" data-target="ch01" style="background:var(--c01)" title="01 — Purpose &amp; Values" onclick="goTo('ch01')"></button>
-    <button class="dot" data-target="ch02" style="background:var(--c02)" title="02 — Storytelling" onclick="goTo('ch02')"></button>
-    <button class="dot" data-target="ch03" style="background:var(--c03)" title="03 — World Building" onclick="goTo('ch03')"></button>
-    <button class="dot" data-target="ch04" style="background:var(--c04)" title="04 — Co-Create &amp; Collab" onclick="goTo('ch04')"></button>
-    <button class="dot" data-target="ch05" style="background:var(--c05)" title="05 — Network Effects" onclick="goTo('ch05')"></button>
-    <button class="dot" data-target="ch06" style="background:var(--c06)" title="06 — Spotlights" onclick="goTo('ch06')"></button>
-    <button class="dot" data-target="ch07" style="background:var(--c07)" title="07 — Phygital Commerce" onclick="goTo('ch07')"></button>
-    <button class="dot" data-target="ch08" style="background:var(--c08)" title="08 — Gamification" onclick="goTo('ch08')"></button>
-    <button class="dot" data-target="ch09" style="background:var(--c09)" title="09 — Receptional Design" onclick="goTo('ch09')"></button>
-    <button class="dot" data-target="ch10" style="background:var(--c10)" title="10 — Engineering for Virality" onclick="goTo('ch10')"></button>
-    <button class="dot" data-target="ch11" style="background:var(--c11)" title="11 — Loyalty Love Loop" onclick="goTo('ch11')"></button>
+  <div class="cover-bg-orbs">
+    <div class="orb" style="background: var(--c01); width: 400px; height: 400px; top: -10%; left: -10%;"></div>
+    <div class="orb" style="background: var(--c06); width: 500px; height: 500px; bottom: -15%; right: -10%; animation-delay: -8s;"></div>
+    <div class="orb" style="background: var(--c09); width: 300px; height: 300px; top: 40%; right: 10%; animation-delay: -4s;"></div>
   </div>
-  <div class="cover-inscription">
-    The first thing you ever told me as a founder was to rest, and to take care of myself. Because of you I'm not only a better founder, but a better friend and thinker. Thank you so much for all that you do — happy birthday.
-    <span class="sig">— Danielle</span>
-  </div>
-  <button class="cover-begin" onclick="goTo('ch01')">Begin</button>
-</section>
-
-<!-- CHAPTER 01 -->
-<section class="page" id="ch01" style="--accent: var(--c01);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 01</div>
-        <div class="chapter-kicker-label">Trust & Meaning</div>
-      </div>
-      <h1 class="chapter-title">Purpose &amp; Values</h1>
-      <p class="chapter-tagline">Shared purpose builds trust and strengthens loyalty.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Shared values and intentions can and will strengthen brand loyalty. Purpose is not a marketing exercise — it is the foundation of everything that follows. Customers want to believe in something. They want their wallets to be a vote, and their attention to be earned by something larger than the product itself.
-        </p>
-        <blockquote class="pullquote-big">
-          Be a purpose <span class="accent">with</span> a company,<br>not a company <span class="accent">with</span> a purpose.
-        </blockquote>
-        <p class="open-q">
-          Who do you trust? What is your purpose? What do you believe in?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 01</div>
-          <div class="side-card-title">Purpose &amp; Values</div>
-          <div class="side-card-body">
-            The foundation for ambition. Defined in three frames: <em>You alone</em> · <em>You &amp; others</em> · <em>You &amp; the world</em>.
-          </div>
-        </div>
-        <div class="side-card">
-          <div class="side-card-label">Threshold</div>
-          <div class="side-card-body" style="color: var(--accent); font-family: 'Fraunces', serif; font-style: italic; font-size: 1.05rem;">
-            87% of U.S. and U.K. consumers say they would buy a product because a company advocated for an issue they cared about.
-          </div>
-        </div>
-      </aside>
+  <div class="cover-content">
+    <div class="cover-occasion">A birthday gift</div>
+    <h1 class="cover-title">Modern Brands<br>&amp; Community<br>Playbook</h1>
+    <div class="cover-sub">Community is serious business.</div>
+    <div class="cover-spectrum">
+      <button class="dot" style="background:var(--c01)" title="01 — Purpose &amp; Values" onclick="goTo('ch01')"></button>
+      <button class="dot" style="background:var(--c02)" title="02 — Storytelling" onclick="goTo('ch02')"></button>
+      <button class="dot" style="background:var(--c03)" title="03 — World Building" onclick="goTo('ch03')"></button>
+      <button class="dot" style="background:var(--c04)" title="04 — Co-Create &amp; Collab" onclick="goTo('ch04')"></button>
+      <button class="dot" style="background:var(--c05)" title="05 — Network Effects" onclick="goTo('ch05')"></button>
+      <button class="dot" style="background:var(--c06)" title="06 — Spotlights" onclick="goTo('ch06')"></button>
+      <button class="dot" style="background:var(--c07)" title="07 — Phygital Commerce" onclick="goTo('ch07')"></button>
+      <button class="dot" style="background:var(--c08)" title="08 — Gamification" onclick="goTo('ch08')"></button>
+      <button class="dot" style="background:var(--c09)" title="09 — Receptional Design" onclick="goTo('ch09')"></button>
+      <button class="dot" style="background:var(--c10)" title="10 — Engineering for Virality" onclick="goTo('ch10')"></button>
+      <button class="dot" style="background:var(--c11)" title="11 — Loyalty Love Loop" onclick="goTo('ch11')"></button>
     </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" disabled>
-        <div class="ch-nav-label">← Previous</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch02')">
-        <div class="ch-nav-label">Chapter 02 →</div>
-        <div class="ch-nav-title">Storytelling</div>
-      </button>
-    </footer>
+    <div class="cover-inscription">
+      The first thing you ever told me as a founder was to rest, and to take care of myself. Because of you I'm not only a better founder, but a better friend and thinker. Thank you so much for all that you do — happy birthday.
+      <span class="sig">— Danielle</span>
+    </div>
+    <button class="cover-begin" onclick="goTo('ch01')">Begin</button>
   </div>
 </section>
 
-<!-- CHAPTER 02 -->
-<section class="page" id="ch02" style="--accent: var(--c02);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 02</div>
-        <div class="chapter-kicker-label">Tell me a story</div>
-      </div>
-      <h1 class="chapter-title">Storytelling</h1>
-      <p class="chapter-tagline">Stories create connection, memory, and community.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          A brand is a story that is always being told, shaped by narratives both real and imagined, memorable and impactful. While data can inform these stories, it does not define them. Founders and teams should tell your story — no one else will tell it the way you do.
-        </p>
-        <div class="reveal-card" onclick="this.classList.toggle('open')">
-          <div class="reveal-prompt">
-            <span>The full brand storytelling map</span>
-            <span class="arrow-r">→</span>
-          </div>
-          <div class="reveal-content">
-            <div class="reveal-body">
-              <em>Strategy</em> — who are we talking to and what do we need to shift?<br><br>
-              <em>Architecture</em> — wound, protagonist, stakes, obstacle, turning point, voice, community, transformation.<br><br>
-              <em>Engineering</em> — open loop, pattern interrupt, rule of 3, signpost, callback, metaphor, call to action.<br><br>
-              <em>Types</em> — serialized, ephemeral, witnessed, live, immersive, embodied, agentic, transmedia.<br><br>
-              <em>Medium</em> — platform, format, attention state, trust signal, AI layer.
+<!-- ============ CH 01 — PURPOSE & VALUES ============ -->
+<section class="page" id="ch01" style="--accent: var(--c01); --accent-soft: var(--c01-soft); --accent-mid: var(--c01-mid);">
+  <div class="chapter-page" data-num="01">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="01">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 01</div>
+          <div class="chapter-banner-kicker">Trust &amp; Meaning</div>
+        </div>
+        <h1 class="chapter-banner-title">Purpose &amp; Values</h1>
+        <p class="chapter-banner-tagline">Shared purpose builds trust and strengthens loyalty.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Shared values and intentions can and will strengthen brand loyalty. Purpose is not a marketing exercise — it is <strong>the foundation</strong> of everything that follows. Customers want to believe in something. They want their wallets to be a vote, and their attention to be earned by something larger than the product itself.
+          </p>
+          <blockquote class="pullquote-big">
+            Be a purpose <span class="accent">with</span> a company,<br>not a company <span class="accent">with</span> a purpose.
+          </blockquote>
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar-label">You Alone</div>
+              <div class="pillar-text">Viewed in isolation</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">You &amp; Others</div>
+              <div class="pillar-text">In relation to stakeholders</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">You &amp; The World</div>
+              <div class="pillar-text">Changing the world</div>
             </div>
           </div>
+          <p class="open-q">
+            Who do you trust? What is your purpose? What do you believe in?
+          </p>
         </div>
-        <blockquote class="pullquote-big">
-          "A brand is not what it says<br>about itself, but what a<br><span class="accent">friend tells a friend.</span>"
-        </blockquote>
-        <p class="open-q">
-          Is your brand crafting stories to disrupt or lead its category? What stories are your communities telling you?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 02</div>
-          <div class="side-card-title">Storytelling</div>
-          <div class="side-card-body">
-            Stories are not what you say. They're what gets repeated. Architecture, engineering, medium — all in service of one thing: <em>does it travel?</em>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 01</div>
+            <div class="side-card-title">Purpose &amp; Values</div>
+            <div class="side-card-body">The foundation for ambition. Defined in three frames.</div>
           </div>
-        </div>
-      </aside>
+          <div class="side-stat">
+            <div class="side-stat-big">87%</div>
+            <div class="side-stat-label">of U.S. &amp; U.K. consumers would buy a product because a company advocated for an issue they cared about.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" disabled>
+          <div class="ch-nav-label">← Previous</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch02')">
+          <div class="ch-nav-label">Chapter 02 →</div>
+          <div class="ch-nav-title">Storytelling</div>
+        </button>
+      </footer>
     </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch01')">
-        <div class="ch-nav-label">← Chapter 01</div>
-        <div class="ch-nav-title">Purpose &amp; Values</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch03')">
-        <div class="ch-nav-label">Chapter 03 →</div>
-        <div class="ch-nav-title">World Building</div>
-      </button>
-    </footer>
   </div>
 </section>
 
-<!-- CHAPTER 03 -->
-<section class="page" id="ch03" style="--accent: var(--c03);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 03</div>
-        <div class="chapter-kicker-label">Come visit me</div>
-      </div>
-      <h1 class="chapter-title">World Building<br>IRL &amp; IVRL</h1>
-      <p class="chapter-tagline">Design immersive experiences people can feel and share.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Show up and meet your community. Experiment with multi-sensory experiences. The brands that build worlds — not just products — are the ones that get visited, talked about, returned to. Touch, sound, scent, light, space: all of it can be designed.
-        </p>
-        <blockquote class="pullquote-big">
-          $110B is the global consumer spend on admissions to live events and experiences.<br><br>
-          <span class="accent">75%</span> value experiences over things.
-        </blockquote>
-        <p class="open-q">
-          How are you bringing the 5 senses to life IRL or IVRL?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 03</div>
-          <div class="side-card-title">Experiences IRL &amp; IVRL</div>
-          <div class="side-card-body">
-            Build a world your community can <em>visit</em> — in real life or in virtual reality. The experience is the brand.
-          </div>
+<!-- ============ CH 02 — STORYTELLING ============ -->
+<section class="page" id="ch02" style="--accent: var(--c02); --accent-soft: var(--c02-soft); --accent-mid: var(--c02-mid);">
+  <div class="chapter-page" data-num="02">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="02">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 02</div>
+          <div class="chapter-banner-kicker">Tell me a story</div>
         </div>
-      </aside>
-    </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch02')">
-        <div class="ch-nav-label">← Chapter 02</div>
-        <div class="ch-nav-title">Storytelling</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch04')">
-        <div class="ch-nav-label">Chapter 04 →</div>
-        <div class="ch-nav-title">Co-Create &amp; Collab</div>
-      </button>
-    </footer>
-  </div>
-</section>
-
-<!-- CHAPTER 04 -->
-<section class="page" id="ch04" style="--accent: var(--c04);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 04</div>
-        <div class="chapter-kicker-label">Let's be friends</div>
-      </div>
-      <h1 class="chapter-title">Co-Create<br>&amp; Collab</h1>
-      <p class="chapter-tagline">Co-create with communities and partner brands to share and grow equity.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Fast-moving cultural forces can forge episodic collaborations between brands, and between brands and their communities. Co-creation comes in all shapes and sizes — often spotlighting community talents and enabling discovery. The long tail of creators are an infinite source of support, and can be your new BFF.
-        </p>
-        <div class="quiz-card">
-          <div class="quiz-q">Why does co-creation matter?</div>
-          <div class="quiz-options">
-            <button class="quiz-opt" data-correct="false">It's a cheaper alternative to traditional marketing.</button>
-            <button class="quiz-opt" data-correct="true">Cultural forces forge episodic collaborations between brands and communities — spotlighting talents and enabling discovery.</button>
-            <button class="quiz-opt" data-correct="false">It's mainly about influencer partnerships and paid sponsorships.</button>
-          </div>
-          <div class="quiz-feedback">
-            75% of consumers want their favorite brands to be more culturally relevant. 60% of Gen Z and millennials have purchased special edition releases. Discovery and identity are the engine.
-          </div>
-        </div>
-        <p class="open-q">
-          Who is your brand partnering with — for a reason, a season, or a lifetime? How do these collabs spotlight your people and tell new stories?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 04</div>
-          <div class="side-card-title">Co-Create &amp; Collab</div>
-          <div class="side-card-body">
-            Shared economy, shared equity. A reason, a season, or a lifetime — not all collabs are forever, and they shouldn't be.
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch03')">
-        <div class="ch-nav-label">← Chapter 03</div>
-        <div class="ch-nav-title">World Building</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch05')">
-        <div class="ch-nav-label">Chapter 05 →</div>
-        <div class="ch-nav-title">Network Effects</div>
-      </button>
-    </footer>
-  </div>
-</section>
-
-<!-- CHAPTER 05 -->
-<section class="page" id="ch05" style="--accent: var(--c05);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 05</div>
-        <div class="chapter-kicker-label">Create defensibility</div>
-      </div>
-      <h1 class="chapter-title">Network Effects<br><span style="font-size:0.55em;color:var(--muted);font-style:italic;">(NFX)</span></h1>
-      <p class="chapter-tagline">Network effects create defensibility and a durable moat.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Network effects are the <em>#1 way</em> to create defensibility and strong connection in the digital world. Scaled and engaged platforms have lower acquisition costs and build defensible moats around their communities. Each new participant makes the network more valuable to every other participant — that is the asymmetry.
-        </p>
-        <blockquote class="pullquote">
-          Companies that leverage network effects have asymmetric upside. They punch above their weight. They are the Davids that beat the Goliaths — and then become the Goliaths.<br><br>
-          <span style="font-size: 0.85rem; font-style: normal; color: var(--muted);">— James Currier, NFX</span>
-        </blockquote>
-        <p class="open-q">
-          What's your network effect? How are you building a movement?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 05</div>
-          <div class="side-card-title">Network Effects</div>
-          <div class="side-card-body">
-            The forms — physical, protocol, personal utility, marketplace, platform, data, tech performance — and the layers underneath: language, belief, bandwagon, expertise, tribal, hub-and-spoke.
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch04')">
-        <div class="ch-nav-label">← Chapter 04</div>
-        <div class="ch-nav-title">Co-Create &amp; Collab</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch06')">
-        <div class="ch-nav-label">Chapter 06 →</div>
-        <div class="ch-nav-title">Spotlights</div>
-      </button>
-    </footer>
-  </div>
-</section>
-
-<!-- CHAPTER 06 -->
-<section class="page" id="ch06" style="--accent: var(--c06);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 06</div>
-        <div class="chapter-kicker-label">I see you</div>
-      </div>
-      <h1 class="chapter-title">Spotlights<br>Who's Your Tribe</h1>
-      <p class="chapter-tagline">Spotlight your people and build for belonging.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Make your stakeholders and community feel seen. They are the heroes in your story. Celebrate all the wins. Identify your tribes — nurture them, spotlight them, amplify their voices. Belonging is a feeling, and feelings are built, intentionally, over time.
-        </p>
-        <blockquote class="pullquote-big">
-          They are the <span class="accent">heroes</span><br>in your story.
-        </blockquote>
-        <p class="open-q">
-          Have you identified your tribes? Are you nurturing, spotlighting and amplifying their voices?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 06</div>
-          <div class="side-card-title">Spotlights: Your Tribe</div>
-          <div class="side-card-body">
-            67% of influencers shape brands across generations. ~60% of paid or non-paid influencers are trusted more than advertising.
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch05')">
-        <div class="ch-nav-label">← Chapter 05</div>
-        <div class="ch-nav-title">Network Effects</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch07')">
-        <div class="ch-nav-label">Chapter 07 →</div>
-        <div class="ch-nav-title">Phygital Commerce</div>
-      </button>
-    </footer>
-  </div>
-</section>
-
-<!-- CHAPTER 07 -->
-<section class="page" id="ch07" style="--accent: var(--c07);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 07</div>
-        <div class="chapter-kicker-label">Let's go shopping</div>
-      </div>
-      <h1 class="chapter-title">Phygital Commerce</h1>
-      <p class="chapter-tagline">Seamlessly connect physical and digital experiences.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          From footfall to click fall, location, location, location still matters. Data-rich, personalized marketplaces inform trends, and conversational AI can turn searches into discoveries — bridging online and offline shopping experiences. The store is the screen and the screen is the store.
-        </p>
-        <blockquote class="pullquote-big">
-          "Adaptive Retail —<br>retail experiences that are<br><span class="accent">personalized and flexible.</span>"
-        </blockquote>
-        <p class="body-text" style="font-style: italic; color: var(--muted); font-size: 0.95rem;">
-          — Doug McMillon, CEO
-        </p>
-        <p class="open-q">
-          How is your brand leveraging data and marketplaces to make every on and offline shopping experience magical?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 07</div>
-          <div class="side-card-title">Phygital Commerce</div>
-          <div class="side-card-body">
-            Marketplace revenue is 60% of Amazon's $573B in 2023 sales. Global commerce will reach $10 trillion by 2027.
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch06')">
-        <div class="ch-nav-label">← Chapter 06</div>
-        <div class="ch-nav-title">Spotlights</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch08')">
-        <div class="ch-nav-label">Chapter 08 →</div>
-        <div class="ch-nav-title">Gamification</div>
-      </button>
-    </footer>
-  </div>
-</section>
-
-<!-- CHAPTER 08 -->
-<section class="page" id="ch08" style="--accent: var(--c08);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 08</div>
-        <div class="chapter-kicker-label">Play with me</div>
-      </div>
-      <h1 class="chapter-title">Gamification</h1>
-      <p class="chapter-tagline">Use play, progress, and rewards to drive engagement.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Gamification can be an invitation, a motivation, or a rallying cry — to learn, compete, or just play. MCoBeauty turned a fictional pink beauty lab into real escape rooms across the U.S. Urban Outfitters built a community you have to earn your way into. Salesforce hid a puzzle inside a 30-second Super Bowl ad and seventy million people showed up to solve it.
-        </p>
-        <div class="quiz-card">
-          <div class="quiz-q">Gamification can be —</div>
-          <div class="quiz-options">
-            <button class="quiz-opt" data-correct="false">A loyalty points program, mostly.</button>
-            <button class="quiz-opt" data-correct="true">An invitation, motivation, or a rallying cry to learn, compete, or just play.</button>
-            <button class="quiz-opt" data-correct="false">A manipulation tactic disguised as engagement.</button>
-          </div>
-          <div class="quiz-feedback">
-            Gamified campaigns are lifting trial engagement by 40% and tripling purchase frequency.
-          </div>
-        </div>
-        <p class="open-q">
-          How is your brand using gaming mechanics to activate participation? Are you turning interactions into shared and playful experiences?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 08</div>
-          <div class="side-card-title">Gamification</div>
-          <div class="side-card-body">
-            2.6B active global gamers. Gaming is one of the most widespread digital behaviors. The U.S. video game market alone will approach $200B by 2027.
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch07')">
-        <div class="ch-nav-label">← Chapter 07</div>
-        <div class="ch-nav-title">Phygital Commerce</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch09')">
-        <div class="ch-nav-label">Chapter 09 →</div>
-        <div class="ch-nav-title">Receptional Design</div>
-      </button>
-    </footer>
-  </div>
-</section>
-
-<!-- CHAPTER 09 -->
-<section class="page" id="ch09" style="--accent: var(--c09);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 09</div>
-        <div class="chapter-kicker-label">Unlocking joy</div>
-      </div>
-      <h1 class="chapter-title">Receptional Design</h1>
-      <p class="chapter-tagline">Design moments of joy at the point of reception.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Receptional design is the art of transforming your customer's emotional state at the precise moment of engagement. It unlocks a moment of joy. It calms a moment of anxiety. It energizes a moment of learning. Emotions live in the brain — serotonin rises as anxiety drops, dopamine fires on achievement, endorphins energize, oxytocin builds trust. Receptional design deliberately activates these pathways.
-        </p>
-        <blockquote class="pullquote-big">
-          Not designing for <span class="accent">conception.</span><br>Designing for <span class="accent">reception.</span>
-        </blockquote>
-        <div class="reveal-card" onclick="this.classList.toggle('open')">
-          <div class="reveal-prompt">
-            <span>Omotenashi</span>
-            <span class="arrow-r">→</span>
-          </div>
-          <div class="reveal-content">
-            <div class="reveal-body">
-              The Japanese concept of <em>Omotenashi</em> — to wholeheartedly look after your guest. Reception and exceptional, fused. The invisible micro-moments that make a guest feel anticipated, cared for, known.
+        <h1 class="chapter-banner-title">Storytelling</h1>
+        <p class="chapter-banner-tagline">Stories create connection, memory, and community.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            A brand is a story that is always being told, shaped by narratives both real and imagined, <em>memorable and impactful</em>. While data can inform these stories, it does not define them. Founders and teams should tell your story — no one else will tell it the way you do.
+          </p>
+          <div class="story-layers">
+            <div class="story-layer">
+              <div class="story-layer-label">Strategy</div>
+              <div class="story-layer-body">Who are we talking to and what do we need to shift?</div>
+            </div>
+            <div class="story-layer">
+              <div class="story-layer-label">Architecture</div>
+              <div class="story-layer-body">Wound, protagonist, stakes, obstacle, turning point, voice, community, transformation.</div>
+            </div>
+            <div class="story-layer">
+              <div class="story-layer-label">Engineering</div>
+              <div class="story-layer-body">Open loop, pattern interrupt, rule of 3, signpost, callback, metaphor, call to action.</div>
+            </div>
+            <div class="story-layer">
+              <div class="story-layer-label">Types</div>
+              <div class="story-layer-body">Serialized, ephemeral, witnessed, live, immersive, embodied, agentic, transmedia.</div>
+            </div>
+            <div class="story-layer">
+              <div class="story-layer-label">Medium</div>
+              <div class="story-layer-body">Platform, format, attention state, trust signal, AI layer.</div>
             </div>
           </div>
+          <blockquote class="pullquote-big">
+            "A brand is not what it says<br>about itself, but what a<br><span class="accent">friend tells a friend.</span>"
+          </blockquote>
+          <p class="open-q">
+            Is your brand crafting stories to disrupt or lead its category? What stories are your communities telling you?
+          </p>
         </div>
-        <p class="open-q">
-          Are you designing the invisible micro-moments, not just the experience itself? Does your product have automagical moments?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 09</div>
-          <div class="side-card-title">Receptional Design</div>
-          <div class="side-card-body">
-            The overlap of <em>RECEPTION</em> and <em>EXCEPTIONAL</em>. Brands can unlock joy. Joy is rooted in the brain. Experience design extends the customer journey through reception.
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 02</div>
+            <div class="side-card-title">Storytelling</div>
+            <div class="side-card-body">Stories are not what you say. They're what gets <em>repeated</em>.</div>
           </div>
-        </div>
-      </aside>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch01')">
+          <div class="ch-nav-label">← Chapter 01</div>
+          <div class="ch-nav-title">Purpose &amp; Values</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch03')">
+          <div class="ch-nav-label">Chapter 03 →</div>
+          <div class="ch-nav-title">World Building</div>
+        </button>
+      </footer>
     </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch08')">
-        <div class="ch-nav-label">← Chapter 08</div>
-        <div class="ch-nav-title">Gamification</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch10')">
-        <div class="ch-nav-label">Chapter 10 →</div>
-        <div class="ch-nav-title">Engineering for Virality</div>
-      </button>
-    </footer>
   </div>
 </section>
 
-<!-- CHAPTER 10 -->
-<section class="page" id="ch10" style="--accent: var(--c10);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 10</div>
-        <div class="chapter-kicker-label">Are you paying attention?</div>
-      </div>
-      <h1 class="chapter-title">Engineering<br>for Virality</h1>
-      <p class="chapter-tagline">Build what spreads &amp; amplify what's already moving.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Virality is behavior designed into the experience that people <em>choose</em> to share and propagate. It is not a great ad. It is not a big influencer. It is not paid distribution. It is the architecture of identity, emotion, and participation — engineered so that sharing feels like self-expression.
-        </p>
-        <div class="equation">
-          <div class="eq-line">
-            Virality =
-            <span class="var">Identity</span>
-            <span class="x">×</span>
-            <span class="var">Emotion</span>
-            <span class="x">×</span>
-            <span class="var">Participation</span>
-          </div>
+<!-- ============ CH 03 — WORLD BUILDING ============ -->
+<section class="page" id="ch03" style="--accent: var(--c03); --accent-soft: var(--c03-soft); --accent-mid: var(--c03-mid);">
+  <div class="chapter-page" data-num="03">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="03">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 03</div>
+          <div class="chapter-banner-kicker">Come visit me</div>
         </div>
-        <div class="reveal-card" onclick="this.classList.toggle('open')">
-          <div class="reveal-prompt">
-            <span>The pattern underneath</span>
-            <span class="arrow-r">→</span>
+        <h1 class="chapter-banner-title">World Building<br>IRL &amp; IVRL</h1>
+        <p class="chapter-banner-tagline">Design immersive experiences people can feel and share.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Show up and meet your community. <em>Experiment with multi-sensory experiences.</em> The brands that build worlds — not just products — are the ones that get visited, talked about, returned to. Touch, sound, scent, light, space: all of it can be designed.
+          </p>
+          <div class="senses">
+            <div class="sense"><div class="sense-icon">👁</div><div class="sense-label">Sight</div></div>
+            <div class="sense"><div class="sense-icon">👂</div><div class="sense-label">Sound</div></div>
+            <div class="sense"><div class="sense-icon">✋</div><div class="sense-label">Touch</div></div>
+            <div class="sense"><div class="sense-icon">👃</div><div class="sense-label">Scent</div></div>
+            <div class="sense"><div class="sense-icon">👅</div><div class="sense-label">Taste</div></div>
           </div>
-          <div class="reveal-content">
-            <div class="reveal-body">
-              <em>Participation ritual</em> — belonging and FOMO simultaneously.<br><br>
-              <em>Personalization</em> — identity expression disguised as sharing.<br><br>
-              <em>Conflict / sides</em> — tribal loyalty and outrage both spread.<br><br>
-              <em>Brand character</em> — entertainment value that earns attention.<br><br>
-              <em>Real-time relevance</em> — first-mover cultural credibility.<br><br>
-              <em>Creative tool</em> — the audience becomes the distribution engine.
+          <blockquote class="pullquote-big">
+            <span class="accent">75%</span> value experiences<br>over things.
+          </blockquote>
+          <p class="open-q">
+            How are you bringing the 5 senses to life IRL or IVRL?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 03</div>
+            <div class="side-card-title">Experiences IRL &amp; IVRL</div>
+            <div class="side-card-body">Build a world your community can <em>visit</em> — in real life or in virtual reality.</div>
+          </div>
+          <div class="side-stat">
+            <div class="side-stat-big">$110B</div>
+            <div class="side-stat-label">global consumer spend on admissions to live events and experiences.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch02')">
+          <div class="ch-nav-label">← Chapter 02</div>
+          <div class="ch-nav-title">Storytelling</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch04')">
+          <div class="ch-nav-label">Chapter 04 →</div>
+          <div class="ch-nav-title">Co-Create &amp; Collab</div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 04 — CO-CREATE ============ -->
+<section class="page" id="ch04" style="--accent: var(--c04); --accent-soft: var(--c04-soft); --accent-mid: var(--c04-mid);">
+  <div class="chapter-page" data-num="04">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="04">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 04</div>
+          <div class="chapter-banner-kicker">Let's be friends</div>
+        </div>
+        <h1 class="chapter-banner-title">Co-Create<br>&amp; Collab</h1>
+        <p class="chapter-banner-tagline">Co-create with communities and partner brands to share and grow equity.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Fast-moving cultural forces forge episodic collaborations between brands, and between brands and their communities. Co-creation comes in all shapes and sizes — often spotlighting community talents and enabling discovery. The long tail of creators are an <em>infinite source of support</em>, and can be your new BFF.
+          </p>
+          <div class="overlap-viz">
+            <div class="overlap-circle"></div>
+            <div class="overlap-circle"></div>
+            <div class="overlap-label">Where two become a third.</div>
+          </div>
+          <div class="quiz-card">
+            <div class="quiz-q">Why does co-creation matter?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-correct="false">It's a cheaper alternative to traditional marketing.</button>
+              <button class="quiz-opt" data-correct="true">Cultural forces forge episodic collaborations between brands and communities — spotlighting talents and enabling discovery.</button>
+              <button class="quiz-opt" data-correct="false">It's mainly about influencer partnerships and paid sponsorships.</button>
+            </div>
+            <div class="quiz-feedback">
+              75% of consumers want their favorite brands to be more culturally relevant. 60% of Gen Z and millennials have purchased special edition releases.
             </div>
           </div>
+          <p class="open-q">
+            Who is your brand partnering with — for a reason, a season, or a lifetime?
+          </p>
         </div>
-        <p class="open-q">
-          What part of this makes someone look good sharing it? Where is the emotional spike? Can users participate, clip, or remix? What's the social payoff? Will they come back for more?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 10</div>
-          <div class="side-card-title">Engineering for Virality</div>
-          <div class="side-card-body">
-            Harness cultural trends, subcultures, and meme-driven dialogues. Foster relationship within the zeitgeist.
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 04</div>
+            <div class="side-card-title">Co-Create &amp; Collab</div>
+            <div class="side-card-body">Shared economy, shared equity. <em>A reason, a season, or a lifetime.</em></div>
           </div>
-        </div>
-      </aside>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch03')">
+          <div class="ch-nav-label">← Chapter 03</div>
+          <div class="ch-nav-title">World Building</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch05')">
+          <div class="ch-nav-label">Chapter 05 →</div>
+          <div class="ch-nav-title">Network Effects</div>
+        </button>
+      </footer>
     </div>
-
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch09')">
-        <div class="ch-nav-label">← Chapter 09</div>
-        <div class="ch-nav-title">Receptional Design</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('ch11')">
-        <div class="ch-nav-label">Chapter 11 →</div>
-        <div class="ch-nav-title">Loyalty Love Loop</div>
-      </button>
-    </footer>
   </div>
 </section>
 
-<!-- CHAPTER 11 -->
-<section class="page" id="ch11" style="--accent: var(--c11);">
-  <div class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-meta-row">
-        <div class="chapter-color-bar"></div>
-        <div class="chapter-num-label">Chapter 11</div>
-        <div class="chapter-kicker-label">Bring your friends</div>
-      </div>
-      <h1 class="chapter-title">Loyalty Love Loop</h1>
-      <p class="chapter-tagline">An immersive infinity loop. Friends bring friends.</p>
-    </header>
-
-    <div class="chapter-body">
-      <div class="chapter-main">
-        <p class="body-text">
-          Loyalty is built on authentic connections — also known as relationships. Relationships can be infinite, and are often nurtured after the sale. Loyalty is about friends bringing friends. It is an immersive infinity loop: every touchpoint pulls people deeper into your brand and experience world.
-        </p>
-        <blockquote class="pullquote-big">
-          Design your world<br>for your community<br><span class="accent">to inhabit.</span>
-        </blockquote>
-        <p class="open-q">
-          How are you designing yours?
-        </p>
-      </div>
-      <aside class="chapter-side">
-        <div class="side-card">
-          <div class="side-card-label">Factor 11</div>
-          <div class="side-card-title">Loyalty Love Loop</div>
-          <div class="side-card-body">
-            The infinity wrapper of the entire playbook. Every chapter pulls back into this one. Loyalty is not transactional — it is inhabited.
-          </div>
+<!-- ============ CH 05 — NETWORK EFFECTS ============ -->
+<section class="page" id="ch05" style="--accent: var(--c05); --accent-soft: var(--c05-soft); --accent-mid: var(--c05-mid);">
+  <div class="chapter-page" data-num="05">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="05">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 05</div>
+          <div class="chapter-banner-kicker">Create defensibility</div>
         </div>
-      </aside>
+        <h1 class="chapter-banner-title">Network Effects</h1>
+        <p class="chapter-banner-tagline">Network effects create defensibility and a durable moat.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Network effects are the <strong>#1 way</strong> to create defensibility and strong connection in the digital world. Scaled and engaged platforms have lower acquisition costs and build defensible moats around their communities. Each new participant makes the network more valuable to every other participant — that is the <em>asymmetry</em>.
+          </p>
+          <div class="network-viz" id="network-viz"></div>
+          <blockquote class="pullquote-big">
+            They are the <span class="accent">Davids</span><br>that beat the Goliaths —<br>and then become the Goliaths.
+          </blockquote>
+          <p class="open-q">
+            What's your network effect? How are you building a movement?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 05</div>
+            <div class="side-card-title">Network Effects (NFX)</div>
+            <div class="side-card-body">Physical, protocol, personal utility, marketplace, platform, data, tech performance — and the layers underneath.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch04')">
+          <div class="ch-nav-label">← Chapter 04</div>
+          <div class="ch-nav-title">Co-Create &amp; Collab</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch06')">
+          <div class="ch-nav-label">Chapter 06 →</div>
+          <div class="ch-nav-title">Spotlights</div>
+        </button>
+      </footer>
     </div>
+  </div>
+</section>
 
-    <footer class="chapter-footer">
-      <button class="ch-nav-btn" onclick="goTo('ch10')">
-        <div class="ch-nav-label">← Chapter 10</div>
-        <div class="ch-nav-title">Engineering for Virality</div>
-      </button>
-      <button class="ch-nav-btn next" onclick="goTo('truth')">
-        <div class="ch-nav-label">Closing →</div>
-        <div class="ch-nav-title">Happy Birthday</div>
-      </button>
-    </footer>
+<!-- ============ CH 06 — SPOTLIGHTS ============ -->
+<section class="page" id="ch06" style="--accent: var(--c06); --accent-soft: var(--c06-soft); --accent-mid: var(--c06-mid);">
+  <div class="chapter-page" data-num="06">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="06">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 06</div>
+          <div class="chapter-banner-kicker">I see you</div>
+        </div>
+        <h1 class="chapter-banner-title">Spotlights<br>Who's Your Tribe</h1>
+        <p class="chapter-banner-tagline">Spotlight your people and build for belonging.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Make your stakeholders and community feel <em>seen</em>. They are the heroes in your story. Celebrate all the wins. Identify your tribes — nurture them, spotlight them, amplify their voices. Belonging is a feeling, and feelings are built, intentionally, over time.
+          </p>
+          <div class="spotlight-box">
+            <p class="spotlight-text">
+              They are the<br><span class="hero">heroes</span><br>in your story.
+            </p>
+          </div>
+          <p class="open-q">
+            Have you identified your tribes? Are you nurturing, spotlighting and amplifying their voices?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 06</div>
+            <div class="side-card-title">Spotlights: Your Tribe</div>
+            <div class="side-card-body">67% of influencers shape brands across generations. The community <em>is</em> the brand.</div>
+          </div>
+          <div class="side-stat">
+            <div class="side-stat-big">55%</div>
+            <div class="side-stat-label">of young adults 13-35 share memes weekly. 30% share daily.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch05')">
+          <div class="ch-nav-label">← Chapter 05</div>
+          <div class="ch-nav-title">Network Effects</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch07')">
+          <div class="ch-nav-label">Chapter 07 →</div>
+          <div class="ch-nav-title">Phygital Commerce</div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 07 — PHYGITAL ============ -->
+<section class="page" id="ch07" style="--accent: var(--c07); --accent-soft: var(--c07-soft); --accent-mid: var(--c07-mid);">
+  <div class="chapter-page" data-num="07">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="07">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 07</div>
+          <div class="chapter-banner-kicker">Let's go shopping</div>
+        </div>
+        <h1 class="chapter-banner-title">Phygital Commerce</h1>
+        <p class="chapter-banner-tagline">Seamlessly connect physical and digital experiences.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            From <em>footfall to click fall</em>, location still matters. Data-rich, personalized marketplaces inform trends, and conversational AI turns searches into discoveries — bridging online and offline. The store is the screen and the screen is the store.
+          </p>
+          <div class="phygital-split">
+            <div class="phygital-side physical">
+              <div class="phygital-side-label">IRL</div>
+              <div class="phygital-side-text">Footfall.<br>Touch.<br>Place.</div>
+            </div>
+            <div class="phygital-bridge">⟷</div>
+            <div class="phygital-side digital">
+              <div class="phygital-side-label">Digital</div>
+              <div class="phygital-side-text">Click fall.<br>Personalized.<br>Everywhere.</div>
+            </div>
+          </div>
+          <blockquote class="pullquote-big">
+            "Adaptive Retail —<br>retail experiences that are<br><span class="accent">personalized and flexible.</span>"
+          </blockquote>
+          <p class="open-q">
+            How is your brand leveraging data and marketplaces to make every shopping experience magical?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 07</div>
+            <div class="side-card-title">Phygital Commerce</div>
+            <div class="side-card-body">From footfall to click fall. <em>Location still matters.</em></div>
+          </div>
+          <div class="side-stat">
+            <div class="side-stat-big">$10T</div>
+            <div class="side-stat-label">global commerce by 2027.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch06')">
+          <div class="ch-nav-label">← Chapter 06</div>
+          <div class="ch-nav-title">Spotlights</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch08')">
+          <div class="ch-nav-label">Chapter 08 →</div>
+          <div class="ch-nav-title">Gamification</div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 08 — GAMIFICATION ============ -->
+<section class="page" id="ch08" style="--accent: var(--c08); --accent-soft: var(--c08-soft); --accent-mid: var(--c08-mid);">
+  <div class="chapter-page" data-num="08">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="08">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 08</div>
+          <div class="chapter-banner-kicker">Play with me</div>
+        </div>
+        <h1 class="chapter-banner-title">Gamification</h1>
+        <p class="chapter-banner-tagline">Use play, progress, and rewards to drive engagement.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Gamification can be an <em>invitation</em>, a <em>motivation</em>, or a <em>rallying cry</em> — to learn, compete, or just play. Salesforce hid a puzzle inside a 30-second Super Bowl ad and seventy million people showed up to solve it.
+          </p>
+          <div class="gamify-board">
+            <div class="gamify-score" id="gamify-score">0</div>
+            <div class="gamify-label">your score</div>
+            <button class="gamify-btn" onclick="addScore()">+1 Play</button>
+          </div>
+          <div class="quiz-card">
+            <div class="quiz-q">Gamification can be —</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-correct="false">A loyalty points program, mostly.</button>
+              <button class="quiz-opt" data-correct="true">An invitation, motivation, or a rallying cry to learn, compete, or just play.</button>
+              <button class="quiz-opt" data-correct="false">A manipulation tactic disguised as engagement.</button>
+            </div>
+            <div class="quiz-feedback">
+              Gamified campaigns lift trial engagement by 40% and triple purchase frequency.
+            </div>
+          </div>
+          <p class="open-q">
+            How is your brand using gaming mechanics to activate participation?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 08</div>
+            <div class="side-card-title">Gamification</div>
+            <div class="side-card-body">Invitation. Motivation. Rallying cry.</div>
+          </div>
+          <div class="side-stat">
+            <div class="side-stat-big">2.6B</div>
+            <div class="side-stat-label">active global gamers. Gaming is one of the most widespread digital behaviors.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch07')">
+          <div class="ch-nav-label">← Chapter 07</div>
+          <div class="ch-nav-title">Phygital Commerce</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch09')">
+          <div class="ch-nav-label">Chapter 09 →</div>
+          <div class="ch-nav-title">Receptional Design</div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 09 — RECEPTIONAL DESIGN ============ -->
+<section class="page" id="ch09" style="--accent: var(--c09); --accent-soft: var(--c09-soft); --accent-mid: var(--c09-mid);">
+  <div class="chapter-page" data-num="09">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="09">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 09</div>
+          <div class="chapter-banner-kicker">Unlocking joy</div>
+        </div>
+        <h1 class="chapter-banner-title">Receptional Design</h1>
+        <p class="chapter-banner-tagline">Design moments of joy at the point of reception.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Receptional design transforms your customer's emotional state at the precise moment of engagement. It unlocks a moment of <em>joy</em>. It calms a moment of <em>anxiety</em>. It energizes a moment of <em>learning</em>. Emotions live in the brain — serotonin rises as anxiety drops, dopamine fires on achievement, endorphins energize, oxytocin builds trust.
+          </p>
+          <div class="joy-burst" id="joy-burst">
+            <span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span>
+            <span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span>
+            <div class="joy-text">a tiny moment of joy</div>
+          </div>
+          <blockquote class="pullquote-big">
+            Not designing for <span class="accent">conception.</span><br>Designing for <span class="accent">reception.</span>
+          </blockquote>
+          <div class="reveal-card" onclick="this.classList.toggle('open')">
+            <div class="reveal-prompt">
+              <span>Omotenashi</span>
+              <span class="arrow-r">→</span>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-body">
+                The Japanese concept of <em>Omotenashi</em> — to wholeheartedly look after your guest. Reception and exceptional, fused. The invisible micro-moments that make a guest feel anticipated, cared for, known.
+              </div>
+            </div>
+          </div>
+          <p class="open-q">
+            Are you designing the invisible micro-moments, not just the experience itself?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 09</div>
+            <div class="side-card-title">Receptional Design</div>
+            <div class="side-card-body">The overlap of <em>RECEPTION</em> and <em>EXCEPTIONAL</em>. Brands can unlock joy.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch08')">
+          <div class="ch-nav-label">← Chapter 08</div>
+          <div class="ch-nav-title">Gamification</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch10')">
+          <div class="ch-nav-label">Chapter 10 →</div>
+          <div class="ch-nav-title">Engineering for Virality</div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 10 — VIRALITY ============ -->
+<section class="page" id="ch10" style="--accent: var(--c10); --accent-soft: var(--c10-soft); --accent-mid: var(--c10-mid);">
+  <div class="chapter-page" data-num="10">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="10">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 10</div>
+          <div class="chapter-banner-kicker">Are you paying attention?</div>
+        </div>
+        <h1 class="chapter-banner-title">Engineering<br>for Virality</h1>
+        <p class="chapter-banner-tagline">Build what spreads &amp; amplify what's already moving.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Virality is behavior designed into the experience that people <em>choose</em> to share and propagate. It is not a great ad. It is not a big influencer. It is not paid distribution. It is the architecture of identity, emotion, and participation — engineered so sharing feels like self-expression.
+          </p>
+          <div class="virality-eq">
+            <div class="eq-line">
+              Virality =
+              <span class="var">Identity</span>
+              <span class="x">×</span>
+              <span class="var">Emotion</span>
+              <span class="x">×</span>
+              <span class="var">Participation</span>
+            </div>
+          </div>
+          <div class="reveal-card" onclick="this.classList.toggle('open')">
+            <div class="reveal-prompt">
+              <span>The pattern underneath</span>
+              <span class="arrow-r">→</span>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-body">
+                <em>Participation ritual</em> — belonging and FOMO simultaneously.<br><br>
+                <em>Personalization</em> — identity expression disguised as sharing.<br><br>
+                <em>Conflict / sides</em> — tribal loyalty and outrage both spread.<br><br>
+                <em>Brand character</em> — entertainment value that earns attention.<br><br>
+                <em>Real-time relevance</em> — first-mover cultural credibility.<br><br>
+                <em>Creative tool</em> — the audience becomes the distribution engine.
+              </div>
+            </div>
+          </div>
+          <p class="open-q">
+            What part of this makes someone look good sharing it? Where is the emotional spike?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 10</div>
+            <div class="side-card-title">Engineering for Virality</div>
+            <div class="side-card-body">Harness cultural trends, subcultures, and meme-driven dialogues.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch09')">
+          <div class="ch-nav-label">← Chapter 09</div>
+          <div class="ch-nav-title">Receptional Design</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('ch11')">
+          <div class="ch-nav-label">Chapter 11 →</div>
+          <div class="ch-nav-title">Loyalty Love Loop</div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 11 — LOYALTY ============ -->
+<section class="page" id="ch11" style="--accent: var(--c11); --accent-soft: var(--c11-soft); --accent-mid: var(--c11-mid);">
+  <div class="chapter-page" data-num="11">
+    <div class="chapter-inner">
+      <header class="chapter-banner" data-num="11">
+        <div class="chapter-banner-meta">
+          <div class="chapter-banner-num">Chapter 11</div>
+          <div class="chapter-banner-kicker">Bring your friends</div>
+        </div>
+        <h1 class="chapter-banner-title">Loyalty Love Loop</h1>
+        <p class="chapter-banner-tagline">An immersive infinity loop. Friends bring friends.</p>
+      </header>
+      <div class="chapter-body">
+        <div class="chapter-main">
+          <p class="body-text">
+            Loyalty is built on authentic connections — also known as <em>relationships</em>. Relationships can be infinite, and are often nurtured after the sale. Loyalty is about friends bringing friends. It is an immersive infinity loop: every touchpoint pulls people deeper into your brand and experience world.
+          </p>
+          <div class="infinity-viz">
+            <div class="infinity-symbol">∞</div>
+          </div>
+          <blockquote class="pullquote-big">
+            Design your world<br>for your community<br><span class="accent">to inhabit.</span>
+          </blockquote>
+          <p class="open-q">
+            How are you designing yours?
+          </p>
+        </div>
+        <aside class="chapter-side">
+          <div class="side-card">
+            <div class="side-card-label">Factor 11</div>
+            <div class="side-card-title">Loyalty Love Loop</div>
+            <div class="side-card-body">The infinity wrapper of the entire playbook. Loyalty is not transactional — it is <em>inhabited</em>.</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="chapter-footer">
+        <button class="ch-nav-btn" onclick="goTo('ch10')">
+          <div class="ch-nav-label">← Chapter 10</div>
+          <div class="ch-nav-title">Engineering for Virality</div>
+        </button>
+        <button class="ch-nav-btn next" onclick="goTo('truth')">
+          <div class="ch-nav-label">Closing →</div>
+          <div class="ch-nav-title">Happy Birthday</div>
+        </button>
+      </footer>
+    </div>
   </div>
 </section>
 
 <!-- CLOSING -->
 <section class="page" id="truth">
+  <div class="truth-orbs">
+    <div class="orb" style="background: var(--c11); width: 500px; height: 500px; top: -10%; left: -15%;"></div>
+    <div class="orb" style="background: var(--c01); width: 400px; height: 400px; bottom: -10%; right: -15%; animation-delay: -8s;"></div>
+  </div>
   <div class="truth-closing">
     <h2>Happy birthday, Tina.</h2>
     <p class="signed">
@@ -1398,15 +1889,23 @@
     });
     document.getElementById('nav-menu').classList.remove('open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    // re-fire ch09 joy animation
+    if (id === 'ch09') {
+      const burst = document.getElementById('joy-burst');
+      if (burst) {
+        const rays = burst.querySelectorAll('.ray');
+        rays.forEach(r => { r.style.animation = 'none'; void r.offsetHeight; r.style.animation = ''; });
+      }
+    }
+    // re-fire ch05 network on entry
+    if (id === 'ch05') buildNetwork();
   }
   window.goTo = goTo;
 
-  function toggleNav() {
-    document.getElementById('nav-menu').classList.toggle('open');
-  }
+  function toggleNav() { document.getElementById('nav-menu').classList.toggle('open'); }
   window.toggleNav = toggleNav;
 
-  // Quiz interactions
+  // Quiz
   document.querySelectorAll('.quiz-card').forEach(card => {
     const opts = card.querySelectorAll('.quiz-opt');
     const feedback = card.querySelector('.quiz-feedback');
@@ -1424,6 +1923,57 @@
       });
     });
   });
+
+  // CH08 — gamify score
+  let score = 0;
+  function addScore() {
+    score++;
+    const el = document.getElementById('gamify-score');
+    el.textContent = score;
+    el.style.transform = 'scale(1.25)';
+    setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+  }
+  window.addScore = addScore;
+
+  // CH05 — build network
+  function buildNetwork() {
+    const viz = document.getElementById('network-viz');
+    if (!viz) return;
+    viz.innerHTML = '';
+    const w = viz.clientWidth, h = viz.clientHeight;
+    const nodes = [];
+    const N = 9;
+    for (let i = 0; i < N; i++) {
+      const x = 30 + Math.random() * (w - 60);
+      const y = 30 + Math.random() * (h - 60);
+      nodes.push({ x, y });
+      const d = document.createElement('div');
+      d.className = 'network-node';
+      d.style.left = x + 'px';
+      d.style.top = y + 'px';
+      d.style.animationDelay = (Math.random() * 2) + 's';
+      viz.appendChild(d);
+    }
+    // connect each node to 2-3 others
+    nodes.forEach((a, i) => {
+      const connectTo = 2 + Math.floor(Math.random() * 2);
+      for (let c = 0; c < connectTo; c++) {
+        const j = (i + 1 + Math.floor(Math.random() * (N - 1))) % N;
+        const b = nodes[j];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const len = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        const line = document.createElement('div');
+        line.className = 'network-line';
+        line.style.left = a.x + 'px';
+        line.style.top = a.y + 'px';
+        line.style.width = len + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+        line.style.animationDelay = (Math.random() * 3) + 's';
+        viz.appendChild(line);
+      }
+    });
+  }
 </script>
 
 </body>
